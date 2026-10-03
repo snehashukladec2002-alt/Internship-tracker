@@ -1,15 +1,1 @@
-{
-  "name": "interntrack-fullstack",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Local full-stack Internship Application Tracker using Express and SQLite",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js"
-  },
-  "dependencies": {
-    "better-sqlite3": "^11.8.1",
-    "express": "^4.21.2"
-  }
-}
+{"name":"interntrack-portal","version":"1.0.0","description":"Internship portal with student, company and admin roles","main":"server.js","scripts":{"start":"node server.js"},"engines":{"node":">=18"}}

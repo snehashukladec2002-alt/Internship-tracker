@@ -1,36 +1,26 @@
-# InternTrack — Full-stack Internship Application Tracker
+# InternTrack Portal
 
-A local full-stack project:
-- Frontend: HTML, CSS, JavaScript
-- Backend: Node.js + Express REST API
-- Database: SQLite (`interntrack.db`, created automatically)
+A no-dependency Node.js internship portal with student, company, and admin roles.
 
-## Requirements
-Install Node.js LTS from https://nodejs.org/ (npm is included).
+## Run locally
+1. Install Node.js 18 or newer.
+2. Open this folder in VS Code.
+3. In the terminal run `node server.js` (or `npm start`).
+4. Open http://localhost:3000
 
-## Run on Windows
-1. Extract this ZIP to a folder.
-2. Open that folder in VS Code, or open Command Prompt in that folder.
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Start the server:
-   ```bash
-   npm start
-   ```
-5. Open http://localhost:3000
+## Demo admin
+On first start, the server prints the admin email and password. Defaults are:
+- Email: `admin@interntrack.local`
+- Password: `Admin@12345`
 
-Keep the terminal window open while using the app. To stop the server, press Ctrl+C.
+Change these before deploying publicly by setting `ADMIN_EMAIL` and `ADMIN_PASSWORD` environment variables. If an admin account already exists in `users.json`, changing env vars does not reset its password.
 
-## API routes
-- `GET /api/health` — health check
-- `GET /api/applications` — list applications
-- `GET /api/applications/:id` — get one application
-- `POST /api/applications` — create application
-- `PUT /api/applications/:id` — update application
-- `DELETE /api/applications/:id` — delete application
-- `PATCH /api/applications/:id/reminders/:key` — mark a reminder complete
-- `GET /api/export` — export backup data as JSON
+## Roles
+- Student: browse listings, apply once per listing, track application status.
+- Company: post internships (new posts require admin approval), view applicants for its own listings, update application status, remove own listings.
+- Admin: view users/listings/applications, approve/reject/publish listings, update application status.
 
-The SQLite database file is created in this project folder. Keep a copy of `interntrack.db` to back up your records.
+## Data and public hosting
+Data is stored in `users.json`, `internships.json`, and `applications.json`. For hosting, use a Node-capable host such as Render. Set `ADMIN_EMAIL`, `ADMIN_PASSWORD`, and `DATA_DIR` to a persistent mounted disk directory (for example `/var/data` if you attach a disk). Without persistent storage, many hosts may erase JSON data on redeploy/restart. For a production service with multiple instances, replace the JSON store with a managed database (PostgreSQL) and add rate limiting, email verification, password reset, CSRF protections, and resume file scanning/storage.
+
+The app listens on `0.0.0.0` and uses the host-provided `PORT` environment variable.
